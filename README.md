@@ -6,14 +6,14 @@ Multi-horizon forecasting (1, 6, 12 and 24 hours ahead) of five pollutants from 
 
 ## Results
 
-- Compared Ridge, Random Forest, Gradient Boosting and MLP on a time-based split; gradient boosting was best overall, with **CO short-horizon R² 0.78** and all pollutants above R² 0.75 at 24 h. (Figures follow the team report's evaluation; per-horizon tables are in the private repo.)
+- Compared Ridge, Random Forest, Gradient Boosting and MLP on a chronological split (train 2004, test 2005); gradient boosting was best overall, with **CO 1-hour-ahead R² 0.78** (RMSE 0.63 mg/m³). Skill falls quickly with horizon (CO R² 0.48 at 6 h, 0.31 at 24 h), which is why the longer horizons are framed as band classification below.
 - **Classification of CO into low / mid / high bands beat the persistence baseline by ~22 percentage points at 6 h** (64.8% vs 42.3%) and ~20 pp at 12 h, the horizons where naive persistence collapses.
-- **NMHC reconstructed** from its 10% overlap with benzene and meteorology using gradient boosting (R² 0.98 on held-out overlap), raising completeness from 10% to 98%.
+- **NMHC reconstructed** from its 10% overlap with benzene and meteorology using gradient boosting (R² 0.98 on the 887-row overlap), raising completeness from 10% to 98%.
 - **Residual 3σ anomaly detection** flagged 12% of training samples; retraining without them improved the two stable pollutants and degraded the three variable ones, so the full-data models were kept. Feature importance: the 24-hour lag (23.8%) outranked the 1-hour lag (19.8%).
 
 ## My role
 
-Data preprocessing lead in a team of five: timestamp reconstruction, missing-value strategy (interpolation for short gaps, exclusion for long ones), NMHC imputation, sensor-proxy feature set for benzene, cyclic time features, and the pollutant-specific lag / rolling feature pipeline (26–43 features per target).
+Data preprocessing lead: timestamp reconstruction, missing-value strategy (interpolation for short gaps, exclusion for long ones), NMHC imputation, sensor-proxy feature set for benzene, cyclic time features, and the pollutant-specific lag / rolling feature pipeline (26–43 features per target).
 
 ## Pipeline
 
@@ -37,4 +37,4 @@ UCI Machine Learning Repository, Air Quality dataset (De Vito et al.), CC BY 4.0
 
 ## Contributors
 
-Team High Grade Miners: Bingcheng (Bensen) Liu (data preprocessing lead) · TODO-NAMES (modelling, classification, report)
+Team project (High Grade Miners); my part is described above.
